@@ -13,21 +13,27 @@ export class TodosContainer extends Component {
     handleChange = (e) => {
         this.setState({
             text: e.target.value
-        })
+        });
+        console.error('HandleChange event fired with an issue...');
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        if (this.state.text.length === 0) {
-            return;
-        }
+        // if (this.state.text.length === 0) {
+        //     return;
+        // }
         const newItem = {
             text: this.state.text,
             id: Date.now()
           };
-        this.setState({
-            items: this.state.items.concat(newItem),
-            text: ''
-        })
+        // input-output testing
+        let parseEntry = /^[A-Za-z]*$/;
+        if (parseEntry.test(newItem.text)){
+            this.setState({
+                items: this.state.items.concat(newItem),
+                text: ''
+            })
+        }
+
     }
     removeItem = (id) => {
         const items = this.state.items.filter(item => {
